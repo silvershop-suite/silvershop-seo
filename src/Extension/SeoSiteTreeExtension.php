@@ -74,6 +74,7 @@ class SeoSiteTreeExtension extends Extension
         'SilverShop\\Page\\CheckoutPage',
         'SilverShop\\Page\\AccountPage',
         'SilverShop\\Search\\SearchPage',
+        'SilverShop\\Comparison\\Pagetypes\\ProductComparisonPage',
     ];
 
     /**
@@ -251,7 +252,25 @@ class SeoSiteTreeExtension extends Extension
             return str_starts_with($override, 'http') ? $override : (string) Director::absoluteURL($override);
         }
 
-        return $owner->hasMethod('AbsoluteLink') ? (string) $owner->AbsoluteLink() : '';
+        $base = $owner->hasMethod('AbsoluteLink') ? (string) $owner->AbsoluteLink() : '';
+
+        // Action/slug sub-pages (e.g. a brand detail /brands/<slug> served by BrandsPage) share their parent page's
+        // AbsoluteLink(), which would wrongly canonicalise every sub-page to the index. When the live request is a
+        // deeper path under the page's own link, self-canonicalise to that request URL (query string stripped).
+        $request = Controller::curr()?->getRequest();
+        if ($request) {
+            $current = (string) Director::absoluteURL('/' . ltrim((string) $request->getURL(false), '/'));
+            if ($base === '') {
+                return $current;
+            }
+            $basePath = rtrim((string) parse_url($base, PHP_URL_PATH), '/');
+            $curPath = rtrim((string) parse_url($current, PHP_URL_PATH), '/');
+            if ($curPath !== $basePath && str_starts_with($curPath . '/', $basePath . '/')) {
+                return $current;
+            }
+        }
+
+        return $base;
     }
 
     /**

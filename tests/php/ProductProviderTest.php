@@ -100,13 +100,14 @@ class ProductProviderTest extends SapphireTest
         $this->assertNotNull($breadcrumbs);
         $items = $breadcrumbs['itemListElement'];
 
-        // Clothing > Jackets > Rain Jacket
-        $this->assertCount(3, $items);
+        // Home > Clothing > Jackets > Rain Jacket (Home is prepended to mirror the on-page breadcrumb).
+        $this->assertCount(4, $items);
         $this->assertSame(1, $items[0]['position']);
-        $this->assertSame('Clothing', $items[0]['name']);
-        $this->assertSame('Jackets', $items[1]['name']);
-        $this->assertSame('Rain Jacket', $items[2]['name']);
-        $this->assertSame(3, $items[2]['position']);
+        $this->assertSame('Home', $items[0]['name']);
+        $this->assertSame('Clothing', $items[1]['name']);
+        $this->assertSame('Jackets', $items[2]['name']);
+        $this->assertSame('Rain Jacket', $items[3]['name']);
+        $this->assertSame(4, $items[3]['position']);
     }
 
     public function testAppliesOnlyToProducts(): void

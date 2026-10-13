@@ -8,6 +8,7 @@ use SilverShop\Seo\StructuredData\SeoContext;
 use SilverShop\Seo\StructuredData\StructuredDataProvider;
 use SilverStripe\Assets\Image;
 use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Control\Director;
 use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\ORM\DataObject;
 
@@ -113,6 +114,20 @@ abstract class AbstractStructuredDataProvider implements StructuredDataProvider
 
         $items = [];
         $position = 1;
+
+        // The on-page breadcrumb starts at Home; mirror that in JSON-LD by prepending a Home node, unless the chain
+        // already begins at the site root.
+        $base = rtrim((string) Director::absoluteBaseURL(), '/');
+        $firstLink = rtrim((string) $this->callMethod($chain[0], 'AbsoluteLink'), '/');
+        if ($firstLink !== $base) {
+            $items[] = [
+                '@type' => 'ListItem',
+                'position' => $position++,
+                'name' => _t(self::class . '.BreadcrumbHome', 'Home'),
+                'item' => $base . '/',
+            ];
+        }
+
         foreach ($chain as $crumb) {
             $items[] = $this->prune([
                 '@type' => 'ListItem',

@@ -12,8 +12,11 @@ use SilverStripe\ORM\DataObject;
  * Guarded, seo-side adapter for {@code silvershop/reviews}. Reads the reviews module's aggregate data (without
  * editing it) and contributes:
  *
- *  - an {@code aggregateRating} + {@code review[]} fragment merged INTO the Product node (by {@code @id}), and
- *  - an {@code aggregateRating} fragment merged INTO the site Organization node when the shop itself has reviews.
+ *  - an {@code aggregateRating} + {@code review[]} fragment merged INTO the Product node (by {@code @id}).
+ *
+ * The shop-level rating is intentionally NOT emitted on the Organization node — Google does not support
+ * aggregateRating on Organization for rich results, and a native-review figure there is self-serving and can
+ * disagree with the external shop rating shown in the footer.
  *
  * Dormant unless the reviews module is installed.
  *
@@ -40,19 +43,9 @@ class ReviewsAdapterProvider extends AbstractStructuredDataProvider
     {
         $nodes = [];
 
-        // Shop-level rating → Organization node (site-wide).
-        $config = $context->getSiteConfig();
-        if ($this->callMethod($config, 'HasShopReviews', false)) {
-            $nodes[] = [
-                '@id' => $context->siteId('organization'),
-                'aggregateRating' => $this->aggregate(
-                    (float) $this->callMethod($config, 'ShopAverageRating', 0.0),
-                    (int) $this->callMethod($config, 'ShopRatingCount', 0)
-                ),
-            ];
-        }
-
-        // Product rating + reviews → Product node (product pages only).
+        // Product rating + reviews → Product node (product pages only). The shop-level rating is intentionally NOT
+        // emitted on the Organization node (see the class docblock): unsupported on Organization for rich results
+        // and inconsistent with the external shop rating in the footer.
         $product = $context->getRecord();
         if ($product instanceof Product && $this->callMethod($product, 'HasReviews', false)) {
             $nodes[] = $this->prune([

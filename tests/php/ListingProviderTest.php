@@ -73,6 +73,8 @@ class ListingProviderTest extends SapphireTest
 
         $breadcrumbs = $this->nodeOfType($nodes, 'BreadcrumbList');
         $this->assertNotNull($breadcrumbs);
-        $this->assertSame('Shoes', $breadcrumbs['itemListElement'][0]['name']);
+        // Home is prepended (the on-page breadcrumb starts at Home), then the category chain.
+        $this->assertSame('Home', $breadcrumbs['itemListElement'][0]['name']);
+        $this->assertSame('Shoes', $breadcrumbs['itemListElement'][1]['name']);
     }
 }
