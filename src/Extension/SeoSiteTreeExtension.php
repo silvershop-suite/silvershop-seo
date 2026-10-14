@@ -84,6 +84,21 @@ class SeoSiteTreeExtension extends Extension
 
     protected function updateCMSFields(FieldList $fields): void
     {
+        // On owners that auto-scaffold their $db fields into the form (e.g. SilverShop\Page\Product), these
+        // extension fields are already present; remove the scaffolded copies so re-adding them to the SEO tab
+        // below cannot duplicate a name (FieldList::getDataFields() throws on duplicates). SiteTree pages don't
+        // scaffold ext $db fields, so this is a no-op there.
+        $fields->removeByName([
+            'MetaTitle',
+            'CanonicalURLOverride',
+            'RobotsIndex',
+            'RobotsFollow',
+            'OGTitle',
+            'OGDescription',
+            'TwitterCard',
+            'OGImage',
+        ]);
+
         $seoFields = [
             TextField::create('MetaTitle', _t(self::class . '.MetaTitle', 'Meta title'))
                 ->setDescription(_t(self::class . '.MetaTitleDesc', 'Overrides the <title> tag. Blank = the page title.')),
