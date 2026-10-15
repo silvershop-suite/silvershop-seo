@@ -1,7 +1,7 @@
 fr:
   SilverShop\Seo\Extension\SeoSiteTreeExtension:
     MetaTitle: 'Méta-titre'
-    MetaTitleDesc: 'Remplace la balise <title>. Vide = le titre de la page.'
+    MetaTitleDesc: 'Remplace la balise &lt;title&gt;. Vide = le titre de la page.'
     MetaDescriptionDesc: 'Affichée dans les extraits des résultats de recherche. Environ 150 à 160 caractères est idéal.'
     Canonical: 'Remplacement de l''URL canonique'
     CanonicalDesc: 'Vide = l''adresse propre de cette page. À renseigner uniquement pour diriger les moteurs vers une autre URL canonique.'

@@ -1,7 +1,7 @@
 nl:
   SilverShop\Seo\Extension\SeoSiteTreeExtension:
     MetaTitle: 'Metatitel'
-    MetaTitleDesc: 'Overschrijft de <title>-tag. Leeg = de paginatitel.'
+    MetaTitleDesc: 'Overschrijft de &lt;title&gt;-tag. Leeg = de paginatitel.'
     MetaDescriptionDesc: 'Wordt getoond in zoekresultaten. Rond de 150–160 tekens werkt het best.'
     Canonical: 'Canonieke URL overschrijven'
     CanonicalDesc: 'Leeg = het eigen adres van deze pagina. Vul alleen in om zoekmachines naar een andere canonieke URL te wijzen.'

@@ -1,7 +1,7 @@
 de:
   SilverShop\Seo\Extension\SeoSiteTreeExtension:
     MetaTitle: 'Meta-Titel'
-    MetaTitleDesc: 'Überschreibt den <title>-Tag. Leer = der Seitentitel.'
+    MetaTitleDesc: 'Überschreibt den &lt;title&gt;-Tag. Leer = der Seitentitel.'
     MetaDescriptionDesc: 'Wird in den Suchergebnis-Snippets angezeigt. Etwa 150–160 Zeichen funktionieren am besten.'
     Canonical: 'Kanonische URL überschreiben'
     CanonicalDesc: 'Leer = die eigene Adresse dieser Seite. Nur setzen, um Suchmaschinen auf eine andere kanonische URL zu verweisen.'

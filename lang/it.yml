@@ -1,7 +1,7 @@
 it:
   SilverShop\Seo\Extension\SeoSiteTreeExtension:
     MetaTitle: 'Meta titolo'
-    MetaTitleDesc: 'Sostituisce il tag <title>. Vuoto = il titolo della pagina.'
+    MetaTitleDesc: 'Sostituisce il tag &lt;title&gt;. Vuoto = il titolo della pagina.'
     MetaDescriptionDesc: 'Mostrata negli snippet dei risultati di ricerca. L''ideale è circa 150–160 caratteri.'
     Canonical: 'Override URL canonico'
     CanonicalDesc: 'Vuoto = l''indirizzo proprio di questa pagina. Compilalo solo per indirizzare i motori di ricerca a un altro URL canonico.'

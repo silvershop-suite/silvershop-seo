@@ -1,7 +1,7 @@
 en:
   SilverShop\Seo\Extension\SeoSiteTreeExtension:
     MetaTitle: 'Meta title'
-    MetaTitleDesc: 'Overrides the <title> tag. Blank = the page title.'
+    MetaTitleDesc: 'Overrides the &lt;title&gt; tag. Blank = the page title.'
     MetaDescriptionDesc: 'Shown in search-engine result snippets. Around 150–160 characters works best.'
     Canonical: 'Canonical URL override'
     CanonicalDesc: 'Blank = this page''s own address. Set only to point search engines at a different canonical URL.'

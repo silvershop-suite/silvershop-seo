@@ -99,22 +99,24 @@ class SeoSiteTreeExtension extends Extension
             'OGImage',
         ]);
 
-        $seoFields = [
-            TextField::create('MetaTitle', _t(self::class . '.MetaTitle', 'Meta title'))
-                ->setDescription(_t(self::class . '.MetaTitleDesc', 'Overrides the <title> tag. Blank = the page title.')),
-        ];
+        // Keep MetaTitle + MetaDescription in the core Metadata section on Root.Main (not the SEO tab).
+        // MetaDescription is a core SiteTree field already there — enrich it in place.
+        $fields->dataFieldByName('MetaDescription')?->setDescription(_t(
+            self::class . '.MetaDescriptionDesc',
+            'Shown in search-engine result snippets. Around 150–160 characters works best.'
+        ));
 
-        // Move the core MetaDescription field into the SEO tab, keeping the field object (so any extension
-        // decoration on it survives) rather than recreating it.
-        $metaDescription = $fields->dataFieldByName('MetaDescription');
-        if ($metaDescription) {
-            $fields->removeByName('MetaDescription');
-            $metaDescription->setDescription(_t(
-                self::class . '.MetaDescriptionDesc',
-                'Shown in search-engine result snippets. Around 150–160 characters works best.'
-            ));
-            $seoFields[] = $metaDescription;
+        // MetaTitle is our own $db field; place it in the Metadata section, just above MetaDescription.
+        $metaTitle = TextField::create('MetaTitle', _t(self::class . '.MetaTitle', 'Meta title'))
+            ->setDescription(_t(self::class . '.MetaTitleDesc', 'Overrides the &lt;title&gt; tag. Blank = the page title.'));
+        $metadata = $fields->fieldByName('Root.Main.Metadata');
+        if ($metadata && method_exists($metadata, 'getChildren')) {
+            $metadata->getChildren()->insertBefore('MetaDescription', $metaTitle);
+        } else {
+            $fields->addFieldToTab('Root.Main', $metaTitle);
         }
+
+        $seoFields = [];
 
         $seoFields = array_merge($seoFields, [
             TextField::create('CanonicalURLOverride', _t(self::class . '.Canonical', 'Canonical URL override'))
