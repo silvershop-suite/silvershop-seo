@@ -1,4 +1,4 @@
-# silvershop/seo
+# silvershop-suite/seo
 
 Centralised SEO for [SilverShop](https://github.com/silvershop/silvershop-core) (SilverStripe CMS 6). It makes SEO a
 first-class, installable layer instead of markup baked into the theme or scattered across feature modules. It owns:
@@ -24,7 +24,7 @@ nothing else to wire up.
 ## Installation
 
 ```bash
-composer require silvershop/seo
+composer require silvershop-suite/seo
 ```
 
 Then run a dev/build (`/dev/build?flush=1`). The extensions are applied automatically to `SiteTree` and `SiteConfig`;
@@ -86,8 +86,8 @@ SilverShop\Seo\StructuredData\StructuredDataRegistry:
 | `OrganizationProvider` | `Organization` + `PostalAddress` + `WebSite` (+ `SearchAction`) | always (store-profile data when present, else SiteConfig title) |
 | `ProductProvider` | `Product` + `Offer` (price, currency, availability, SKU, condition, seller) + `BreadcrumbList` | on `SilverShop\Page\Product` |
 | `ListingProvider` | `ItemList` + `BreadcrumbList` | on `SilverShop\Page\ProductCategory` |
-| `ReviewsAdapterProvider` | `aggregateRating` + `review[]` → Product node; shop `aggregateRating` → Organization node | `silvershop/reviews` installed |
-| `BrandAdapterProvider` | `brand` → Product node | `silvershop/brands` installed, product has a brand |
+| `ReviewsAdapterProvider` | `aggregateRating` + `review[]` → Product node; shop `aggregateRating` → Organization node | `silvershop-suite/reviews` installed |
+| `BrandAdapterProvider` | `brand` → Product node | `silvershop-suite/brands` installed, product has a brand |
 | `ArticleProvider` | `BlogPosting` | `silverstripe/blog` installed |
 | `EventProvider` | `Event` | an events page class is listed in `event_classes` |
 
@@ -98,11 +98,11 @@ when present.
 
 #### Known caveat — reviews double-emit
 
-`silvershop/reviews` still prints its own standalone `<script type="application/ld+json">` on product and shop pages.
+`silvershop-suite/reviews` still prints its own standalone `<script type="application/ld+json">` on product and shop pages.
 With both modules installed, a page therefore emits the rating **twice**: once inside this module's `@graph`, once in
 the reviews module's own block. Google tolerates duplicate `aggregateRating`, but the clean fix is a **coordinated
 reviews release** in which reviews implements this contract and self-suppresses its standalone markup when
-`silvershop/seo` is present. That is a documented follow-up; this module does not (and must not) edit reviews.
+`silvershop-suite/seo` is present. That is a documented follow-up; this module does not (and must not) edit reviews.
 
 ### Sitemap
 
