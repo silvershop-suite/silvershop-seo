@@ -163,3 +163,7 @@ source of truth where they overlap.
 ## License
 
 BSD-3-Clause.
+
+## Credits
+
+Built and maintained by **Remy Vaartjes** (<remy@xd.nl>) — part of the **SilverShop-Suite**.
