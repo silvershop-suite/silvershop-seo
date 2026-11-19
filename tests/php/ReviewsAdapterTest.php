@@ -10,8 +10,9 @@ use SilverStripe\Dev\SapphireTest;
 
 /**
  * The guarded reviews adapter: dormant when the reviews module is absent, and — when product rating data is present
- * (simulated by {@link StubReviewableExtension} so the test needs no dependency on silvershop/reviews) — contributes
- * an aggregateRating fragment keyed to the Product node's @id (no @type, so it merges in rather than duplicating).
+ * (simulated by {@link StubReviewableExtension} so the test needs no dependency on silvershop-suite/reviews) —
+ * contributes an aggregateRating fragment keyed to the Product node's @id (no @type, so it merges in rather than
+ * duplicating).
  */
 class ReviewsAdapterTest extends SapphireTest
 {

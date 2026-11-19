@@ -9,7 +9,7 @@ use SilverShop\Seo\StructuredData\SeoContext;
 use SilverStripe\ORM\DataObject;
 
 /**
- * Guarded, seo-side adapter for {@code silvershop/reviews}. Reads the reviews module's aggregate data (without
+ * Guarded, seo-side adapter for {@code silvershop-suite/reviews}. Reads the reviews module's aggregate data (without
  * editing it) and contributes:
  *
  *  - an {@code aggregateRating} + {@code review[]} fragment merged INTO the Product node (by {@code @id}).

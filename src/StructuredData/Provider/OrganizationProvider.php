@@ -13,8 +13,8 @@ use SilverStripe\ORM\DataObject;
  * The site-level Organization + WebSite nodes, present on every page so other nodes (Product offers' seller,
  * article publisher, …) can reference them by {@code @id}.
  *
- * Data comes from {@code silvershop/store-profile} when installed (name, logo, address, contact, VAT); otherwise it
- * falls back to the bare SiteConfig title + base URL. When {@code silvershop/search} is installed a WebSite
+ * Data comes from {@code silvershop-suite/store-profile} when installed (name, logo, address, contact, VAT); otherwise
+ * it falls back to the bare SiteConfig title + base URL. When {@code silvershop-suite/search} is installed a WebSite
  * {@code SearchAction} (the sitelinks search box) is added, pointing at the search page.
  */
 class OrganizationProvider extends AbstractStructuredDataProvider
@@ -128,7 +128,7 @@ class OrganizationProvider extends AbstractStructuredDataProvider
     }
 
     /**
-     * A WebSite SearchAction pointing at the search page, when silvershop/search is installed.
+     * A WebSite SearchAction pointing at the search page, when silvershop-suite/search is installed.
      *
      * @return array<string, mixed>
      */

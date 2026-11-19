@@ -7,7 +7,7 @@ use SilverStripe\Dev\TestOnly;
 
 /**
  * Stands in for the reviews module's product aggregate helpers so the ReviewsAdapterProvider enrichment can be tested
- * without depending on silvershop/reviews. Methods only (no $db), so it can be applied at runtime.
+ * without depending on silvershop-suite/reviews. Methods only (no $db), so it can be applied at runtime.
  *
  * @extends Extension<\SilverShop\Page\Product>
  */

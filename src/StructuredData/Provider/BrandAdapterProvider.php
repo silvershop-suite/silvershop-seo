@@ -10,7 +10,7 @@ use SilverStripe\Control\Director;
 use SilverStripe\ORM\DataObject;
 
 /**
- * Guarded, seo-side adapter for {@code silvershop/brands}. Reads the product's linked Brand (without editing the
+ * Guarded, seo-side adapter for {@code silvershop-suite/brands}. Reads the product's linked Brand (without editing the
  * brands module) and merges a schema.org {@code brand} into the Product node by {@code @id}. Dormant unless the
  * brands module is installed and the product has a brand.
  */
